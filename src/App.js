@@ -6,7 +6,7 @@ import './App.css';
 class App extends Component {
 
   state = {
-    id: 0,
+    count: 0,
     content: 'World!',
   };
 
@@ -14,8 +14,10 @@ class App extends Component {
     console.log(event);
     axios.get(`https://itsl1t-rest.herokuapp.com/greeting?name=${event.target.value}`)
       .then(result => {
+        console.log('result is: ', result);
         this.setState({
-          ...result
+          count: result.data.id,
+          content: result.data.content
         });
       })
   };
@@ -30,8 +32,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <input type='text' value={this.state.name} onChange={this.setName} />
-        <p>{this.state.name}:{this.state.count}</p>
+        <input type='text' value={this.state.content} onChange={this.setName} />
+        <p>{this.state.content}:{this.state.count}</p>
       </div>
     );
   }
